@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils.text import slugify
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=50)
@@ -22,12 +23,19 @@ class Customer(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, max_length=100)
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
     
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, max_length=100)
     category = models.ForeignKey(
         Category, 
         on_delete=models.SET_DEFAULT, 
@@ -35,12 +43,17 @@ class Product(models.Model):
     )
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     description = models.CharField(max_length=250, default='', blank=True, null=True)
-    image = models.ImageField(upload_to='uploads/products/')
     inventory = models.PositiveIntegerField(default=0)
     discount_price = models.FloatField(blank=True, null=True)
     rating = models.FloatField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # using slugify to make url SEO friendly
+    def save(self, *args, **kwargs):
+        if not self.slug and self.product_name:
+            self.slug = slugify(self.product_name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.product_name
