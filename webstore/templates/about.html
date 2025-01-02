@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">About Us</h1>
+        <p class="text-muted">Discover who we are and what we stand for.</p>
+    </div>
+
+    <!-- Company Overview -->
+    <section class="mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="fw-bold">Our Story</h2>
+                <p class="text-muted">
+                    Founded in 2025, Sasta Market has been at the forefront of online affordable shopping. 
+                    Our journey began with a vision to serve happiness to budgetfriendly customers who wants to shop online, and over the years, 
+                    we have grown into a trusted name, serving countless customers worldwide.
+                </p>
+                <p class="text-muted">
+                    We pride ourselves on innovation, customer satisfaction, and a commitment to 
+                    making a difference in the communities we serve.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'Images/about_us.jpg' %}" alt="About Us" class="img-fluid rounded">
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Vision -->
+    <section class="mb-5 bg-light p-4 rounded">
+        <div class="row text-center">
+            <div class="col-md-6">
+                <h3 class="fw-bold">Our Mission</h3>
+                <p class="text-muted">
+                    To provide exceptional products that enhance the lives of our customers 
+                    while fostering a culture of innovation and inclusivity.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h3 class="fw-bold">Our Vision</h3>
+                <p class="text-muted">
+                    To be a global leader in online affordable shopping by delivering quality, sustainability, and innovation 
+                    through every interaction.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="mb-5">
+        <h2 class="fw-bold text-center">Meet the Team</h2>
+        <div class="row text-center mt-4">
+            <div class="col-md-4">
+                <img src="{% static 'Images/team_member_1.jpg' %}?v={{ request.resolver_match.url_name }}" alt="Team Member 1" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+                <h5 class="fw-bold">Amitabh Bachchan</h5>
+                <p class="text-muted">CEO & Founder</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'Images/team_member_2.jpg' %}" alt="Team Member 2" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+                <h5 class="fw-bold">Ranbir Kapoor</h5>
+                <p class="text-muted">Head of Operations</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{% static 'Images/team_member_3.jpeg' %}" alt="Team Member 3" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+                <h5 class="fw-bold">Alice Johnson</h5>
+                <p class="text-muted">Lead Developer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center mb-5">
+        <h3 class="fw-bold">Want to Learn More?</h3>
+        <p class="text-muted">Feel free to reach out to us with any questions or feedback.</p>
+        <a href="{% url 'contact' %}" class="btn btn-secondary">Contact Us</a>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Header-->
+<header class="py-5" style="background: linear-gradient(to right,rgb(63, 119, 218),rgb(164, 199, 226)); color: #fff;">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center">
+            <h1 class="display-4 fw-bolder">Welcome to Sasta Market</h1>
+            <p class="lead fw-normal text-white-75 mb-0">Your one-stop destination for quality and affordability</p>
+        </div>
+    </div>
+</header>
+
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            {% comment %} changed mannually {% endcomment %}
+            
+            {% for product in products %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product images -->
+                    <div id="carousel-{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image in product.images.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img class="d-block w-100" src="{{ image.image.url }}" alt="Image for {{ product.product_name }}" >
+                                    <!-- style="max-height:30vh; object-fit: contain;" -->
+                                    <p> {{ image.image.url }} </p>
+                                </div> 
+
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carousel-{{ product.id }}" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-{{ product.id }}" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
+                    <!-- Product details -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name -->
+                            <h5 class="fw-bolder">{{ product.product_name }}</h5>
+                            <!-- Product price -->
+                            ${{ product.price }}
+                            <br>
+                            {{product.description}}
+                            <br>
+                            
+                        </div>
+                    </div>
+                    <!-- Product actions -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="#">View options</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
